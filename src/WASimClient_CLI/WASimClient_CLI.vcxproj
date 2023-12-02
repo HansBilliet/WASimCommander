@@ -190,6 +190,9 @@
     <Manifest>
       <AdditionalManifestFiles>$(ProjectDir)deps.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
     </Manifest>
+    <PostBuildEvent>
+      <Command>copy /Y "$(OutDir)*.dll" "C:\Projects\WASimCommander\DLL"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-net6|x64'">
     <ClCompile>
@@ -216,6 +219,9 @@
     <Manifest>
       <AdditionalManifestFiles>$(ProjectDir)deps.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
     </Manifest>
+    <PostBuildEvent>
+      <Command>copy /Y "$(OutDir)*.dll" "C:\Projects\WASimCommander\DLL"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-net7|x64'">
     <ClCompile>
@@ -242,6 +248,9 @@
     <Manifest>
       <AdditionalManifestFiles>$(ProjectDir)deps.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
     </Manifest>
+    <PostBuildEvent>
+      <Command>copy /Y "$(OutDir)*.dll" "C:\Projects\WASimCommander\DLL"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-netfw|x64'">
     <ClCompile>
@@ -268,6 +277,9 @@
     <Manifest>
       <AdditionalManifestFiles>$(ProjectDir)deps.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
     </Manifest>
+    <PostBuildEvent>
+      <Command>copy /Y "$(OutDir)*.dll" "C:\Projects\WASimCommander\DLL"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Enums.h" />

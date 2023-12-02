@@ -204,8 +204,7 @@
       <AdditionalDependencies>SimConnect.lib;Ws2_32.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy /Y "$(OutDir)*.dll" "C:\Projects\WASimCommander\WASimUI-v1.2.0.1-DLL" &amp; copy /Y "$(OutDir)*.dll" "C:\Projects\WASimCommander\DLL"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-DLL|x64'">

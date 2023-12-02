@@ -83,7 +83,7 @@
       <NoEntryPoint>true</NoEntryPoint>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(OutDir)*.*" "$(ProjectDir)\WASimModuleProject\WASimCommander-Module\PackageSources\WASimModule"</Command>
+      <Command>copy /Y "$(OutDir)*.*" "C:\Projects\MSFS WASM Projects\WASimCommander\PackageSources\Copys\wasimcommander\Module"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|MSFS'">
@@ -112,7 +112,7 @@
       <NoEntryPoint>true</NoEntryPoint>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(OutDir)*.*" "$(ProjectDir)\WASimModuleProject\WASimCommander-Module\PackageSources\WASimModule"</Command>
+      <Command>copy /Y "$(OutDir)*.*" "C:\Projects\MSFS WASM Projects\WASimCommander\PackageSources\Copys\wasimcommander\Module"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

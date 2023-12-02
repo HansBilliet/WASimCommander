@@ -6,7 +6,7 @@
 
 [CmdletBinding(PositionalBinding=$false)]
 Param(
-  [string[]]$Targets = "all",
+  [string[]]$Targets = "version",
   [string]$RootPath = "..",
   [string[]]$Configuration = @("Debug", "Debug-DLL", "Release-DLL", "Release-net6", "Release-net7", "Release-netfw", "Release"),
   [string]$Platform = "x64",

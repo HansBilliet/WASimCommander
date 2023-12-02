@@ -29,22 +29,22 @@ and are available at <http://www.gnu.org/licenses/>.
 #define WSMCMND_VER_MAJOR         1
 #define WSMCMND_VER_MINOR         2
 #define WSMCMND_VER_PATCH         0
-#define WSMCMND_VER_BUILD         0
+#define WSMCMND_VER_BUILD         1
 // Git commit hash (top 8 bytes)
-#define WSMCMND_VER_COMIT         0x4A699DF9UL
+#define WSMCMND_VER_COMIT         0x4E5454FFUL
 /// Version number in 32 bit "binary coded decimal", eg. 0x01230400 = 1.23.4.0
-#define WSMCMND_VERSION           0x01020000UL
+#define WSMCMND_VERSION           0x01020001UL
 /// Possible version suffix, eg "-beta1"  (can be blank for release versions)
 #define WSMCMND_VER_NAME          ""
 /// Dotted version string Maj.Min.Pat.Bld, eg. "1.23.4.0"
-#define WSMCMND_VERSION_STR       "1.2.0.0"
+#define WSMCMND_VERSION_STR       "1.2.0.1"
 /// Dotted version string with possible suffix, eg. "1.23.4.0-beta1"
-#define WSMCMND_VERSION_INFO      "1.2.0.0"
+#define WSMCMND_VERSION_INFO      "1.2.0.1"
 /// Build date & time in ISO-8601 "Zulu Time" format, UTC
-#define WSMCMND_BUILD_DATE        "2023-11-01T18:50:07Z"
+#define WSMCMND_BUILD_DATE        "2023-12-02T16:02:21Z"
 
 
-#define WSMCMND_PROJECT_URL       "https://github.com/mpaperno/WASimCommander"
+#define WSMCMND_PROJECT_URL       "https://github.com/HansBilliet/WASimCommander"
 #define WSMCMND_PROJECT_COPYRIGHT "Copyright Maxim Paperno; All rights reserved."
 #define WSMCMND_PROJECT_DESCRIPT  "Remote access to the Microsoft Flight Simulator 2020 Gauge API."
 #define WSMCMND_PROJECT_LICENSE   "WASimCommander API and WASimClient licensed under LGPL v3 or GPL v3. WASimModule and all other code licensed under GPL v3. Full terms are detailed in the README, LICENSE.GPL.txt, and LICENSE.LGPL.txt files which should accompany this distribution and are available at the project's URL."
