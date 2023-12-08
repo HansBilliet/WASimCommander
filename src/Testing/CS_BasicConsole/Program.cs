@@ -17,6 +17,8 @@ A copy of the GNU GPL is included with this project
 and is also available at <http://www.gnu.org/licenses/>.
 */
 
+#define SimCustomEventTests // ADDITIONAL TESTS for Simulator Custom Events
+
 using System;
 using System.Threading;
 using WASimCommander.CLI;
@@ -80,6 +82,96 @@ namespace CS_BasicConsole
 				client.Dispose();
 				return;
 			}
+
+			#region SimCustomEventTests - tests for registerCustomEvent and adapted sendKeyEvent code - FlyByWire A32NX addon required 
+
+#if SimCustomEventTests // ADDITIONAL TESTS for Simulator Custom Events START -----------------------------------
+
+			// We're connected with the sim, not with the server
+			uint customEventId_SPD_INC = 0; // A32NX.FCU_SPD_INC
+			uint customEventId_SPD_DEC = 0; // A32NX.FCU_SPD_DEC
+			uint customEventId_APU_TGL = 0; // APU_GENERATOR_SWITCH_TOGGLE
+			uint customEventId_INC_SET = 0; // A32NX.FCU_ALT_INCREMENT_SET
+			uint dummy;
+
+			// register A32NX.FCU_SPD_INC first time
+			hr = client.registerCustomEvent("A32NX.FCU_SPD_INC", out customEventId_SPD_INC);
+			Log($"registerCustomEvent A32NX.FCU_SPD_INC with ID {customEventId_SPD_INC} returns {hr}", "<<");
+
+			// register A32NX.FCU_SPD_INC second time
+			hr = client.registerCustomEvent("A32NX.FCU_SPD_INC", out dummy);
+			Log($"registerCustomEvent A32NX.FCU_SPD_INC with ID {dummy} returns {hr}", "<<");
+
+			// register APU_GENERATOR_SWITCH_TOGGLE second time
+			hr = client.registerCustomEvent("APU_GENERATOR_SWITCH_TOGGLE", out customEventId_APU_TGL);
+			Log($"registerCustomEvent APU_GENERATOR_SWITCH_TOGGLE with ID {customEventId_APU_TGL} returns {hr}", "<<");
+
+			// Increase SPD by Id - Simulator Custom Event
+			hr = client.sendKeyEvent(customEventId_SPD_INC);
+			Log($"sendKeyEvent A32NX.FCU_SPD_INC with ID {customEventId_SPD_INC} returns {hr}", "<<");
+			// Increase SPD by name - Simulator Custom Event
+			hr = client.sendKeyEvent("A32NX.FCU_SPD_INC");
+			Log($"sendKeyEvent A32NX.FCU_SPD_INC with ID {customEventId_SPD_INC} returns {hr}", "<<");
+			// Toggle APU Generator Switch - Simulator Key Event
+			hr = client.sendKeyEvent("APU_GENERATOR_SWITCH_TOGGLE");
+			Log($"sendKeyEvent APU_GENERATOR_SWITCH_TOGGLE with ID {customEventId_APU_TGL} returns {hr}", "<<");
+
+			// Send not registered event
+			hr = client.sendKeyEvent(customEventId_SPD_INC + 1000);
+			Log($"sendKeyEvent UNKNOWN with ID {customEventId_SPD_INC + 1000} returns {hr}", "<<");
+			hr = client.sendKeyEvent("UNKNOWN.UNKNOWN");
+			Log($"sendKeyEvent UNKNOWN.UNKNOWN with ID ???? returns {hr}", "<<");
+
+			// Disconnect simulator to test pending registrations
+			client.disconnectSimulator();
+
+			// register A32NX.FCU_SPD_DEC
+			hr = client.registerCustomEvent("A32NX.FCU_SPD_DEC", out customEventId_SPD_DEC);
+			Log($"registerCustomEvent A32NX.FCU_SPD_DEC with ID {customEventId_SPD_DEC} returns {hr}", "<<");
+
+			// register A32NX.FCU_ALT_INCREMENT_SET
+			hr = client.registerCustomEvent("A32NX.FCU_ALT_INCREMENT_SET", out customEventId_INC_SET);
+			Log($"registerCustomEvent A32NX.FCU_ALT_INCREMENT_SET with ID {customEventId_INC_SET} returns {hr}", "<<");
+
+			// trigger all events while simulator is disconnected
+			hr = client.sendKeyEvent(customEventId_SPD_INC);
+			Log($"sendKeyEvent A32NX.FCU_SPD_INC with ID {customEventId_SPD_INC} returns {hr}", "<<");
+			hr = client.sendKeyEvent("A32NX.FCU_SPD_DEC");
+			Log($"sendKeyEvent A32NX.FCU_SPD_DEC with ID {customEventId_SPD_DEC} returns {hr}", "<<");
+			hr = client.sendKeyEvent(customEventId_INC_SET, 100);
+			Log($"sendKeyEvent A32NX.FCU_ALT_INCREMENT_SET=100 with ID {customEventId_INC_SET} returns {hr}", "<<");
+			hr = client.sendKeyEvent("A32NX.FCU_ALT_INCREMENT_SET", 1000);
+			Log($"sendKeyEvent A32NX.FCU_ALT_INCREMENT_SET=1000 with ID {customEventId_INC_SET} returns {hr}", "<<");
+
+			// Connect to Simulator (SimConnect) using default timeout period and network configuration (local Simulator)
+			if ((hr = client.connectSimulator()) != HR.OK)
+			{
+				Log("Cannot connect to Simulator, quitting. Error: " + hr.ToString(), "XX");
+				client.Dispose();
+				return;
+			}
+
+			// Try to connect to the server, using default timeout value.
+			if ((hr = client.connectServer()) != HR.OK)
+			{
+				Log("Server connection failed, quitting. Error: " + hr.ToString(), "XX");
+				client.Dispose();
+				return;
+			}
+
+			// trigger all events while simulator is connected
+			hr = client.sendKeyEvent(customEventId_SPD_INC);
+			Log($"sendKeyEvent A32NX.FCU_SPD_INC with ID {customEventId_SPD_INC} returns {hr}", "<<");
+			hr = client.sendKeyEvent("A32NX.FCU_SPD_DEC");
+			Log($"sendKeyEvent A32NX.FCU_SPD_DEC with ID {customEventId_SPD_DEC} returns {hr}", "<<");
+			hr = client.sendKeyEvent(customEventId_INC_SET, 100);
+			Log($"sendKeyEvent A32NX.FCU_ALT_INCREMENT_SET=100 with ID {customEventId_INC_SET} returns {hr}", "<<");
+			hr = client.sendKeyEvent("A32NX.FCU_ALT_INCREMENT_SET", 1000);
+			Log($"sendKeyEvent A32NX.FCU_ALT_INCREMENT_SET=1000 with ID {customEventId_INC_SET} returns {hr}", "<<");
+
+#endif // ADDITIONAL TESTS for Simulator Custom Events END ----------------------------------
+
+			#endregion SimCustomEventTests
 
 			// set up a Simulator Variable for testing.
 			const string simVarName = "CG PERCENT";

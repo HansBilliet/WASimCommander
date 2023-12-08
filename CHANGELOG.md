@@ -1,5 +1,12 @@
 # WASimCommander - Change Log
 
+## 1.2.1.0 (02-Dec-2023)
+
+### WASimClient and WASimClient_CLI (managed .NET)
+
+* Added registerCustomEvent that allows to register Simulator Custom Events (having a "." in the Event Name) - these are not Calculator Custom Events that are registred using registerEvent
+* Adapted sendKeyEvent which can now also be used to trigger the Simulator Custom Events (currently only with 1 parameter
+
 ## 1.2.0.0 (07-Nov-2022)
 
 ### WASimModule
