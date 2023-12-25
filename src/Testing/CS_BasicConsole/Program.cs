@@ -169,6 +169,18 @@ namespace CS_BasicConsole
 			hr = client.sendKeyEvent("A32NX.FCU_ALT_INCREMENT_SET", 1000);
 			Log($"sendKeyEvent A32NX.FCU_ALT_INCREMENT_SET=1000 with ID {customEventId_INC_SET} returns {hr}", "<<");
 
+			// remove 2 Custom Events, one by ID and one by name
+			hr = client.removeCustomEvent(customEventId_SPD_INC);
+			Log($"removeCustomEvent A32NX.FCU_SPD_INC with ID {customEventId_SPD_INC} returns {hr}", "<<");
+			hr = client.removeCustomEvent("A32NX.FCU_SPD_DEC");
+			Log($"removeCustomEvent A32NX.FCU_SPD_INC with Name \"A32NX.FCU_SPD_DEC\" returns {hr}", "<<");
+
+			// trigger both removed events
+			hr = client.sendKeyEvent(customEventId_SPD_INC);
+			Log($"sendKeyEvent A32NX.FCU_SPD_INC with ID {customEventId_SPD_INC} returns {hr}", "<<");
+			hr = client.sendKeyEvent("A32NX.FCU_SPD_DEC");
+			Log($"sendKeyEvent A32NX.FCU_SPD_DEC with ID {customEventId_SPD_DEC} returns {hr}", "<<");
+
 #endif // ADDITIONAL TESTS for Simulator Custom Events END ----------------------------------
 
 			#endregion SimCustomEventTests
