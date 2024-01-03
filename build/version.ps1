@@ -1,8 +1,8 @@
 
 $VER_MAJOR = 1
 $VER_MINOR = 2
-$VER_PATCH = 2
-$VER_BUILD = 0
+$VER_PATCH = 0
+$VER_BUILD = 1
 $VER_COMIT = 0
 $VER_NAME  = ""
 

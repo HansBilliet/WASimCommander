@@ -506,8 +506,8 @@ namespace WASimCommander::CLI::Structs
 	{
 		public:
 			SByte variableType { 'L' };
-			String ^ variableName;
-			String ^ unitName;
+			String^ variableName = ""; // HABI addition - assigning the empty string avoids a C# 'System.ArgumentNullException'
+			String^ unitName = ""; // HABI addition - assigning the empty string avoids a C# 'System.ArgumentNullException'
 			int variableId { -1 };
 			int unitId { -1 };
 			Byte simVarIndex { 0 };
